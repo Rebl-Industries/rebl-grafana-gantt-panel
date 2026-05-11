@@ -1,5 +1,5 @@
 {
-  "name": "marcusolsson-gantt-panel",
+  "name": "rebl-gantt-panel",
   "version": "0.8.1",
   "description": "A Gantt visualization for Grafana",
   "keywords": [

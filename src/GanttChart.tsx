@@ -8,7 +8,7 @@ import {
   SelectableValue,
   TimeRange,
 } from '@grafana/data';
-import { Badge, graphTimeFormat, Select, useStyles2, useTheme2 } from '@grafana/ui';
+import { Badge, Select, useStyles2, useTheme2 } from '@grafana/ui';
 import * as d3 from 'd3';
 import dayjs from 'dayjs';
 import { getFormattedDisplayValue, measureText } from 'grafana-plugin-support';
@@ -16,6 +16,32 @@ import humanizeDuration from 'humanize-duration';
 import React, { useRef, useState } from 'react';
 import { GanttTask } from './GanttTask';
 import { labelColor } from './helpers';
+
+// Inlined from @grafana/ui (removed in newer Grafana versions).
+function graphTimeFormat(ticks: number, min: number | null, max: number | null): string {
+  if (min && max && ticks) {
+    const range = max - min;
+    const secPerTick = range / ticks / 1000;
+    const oneDay = 86400010;
+    const oneYear = 31536000000;
+
+    if (secPerTick <= 45) {
+      return 'HH:mm:ss';
+    }
+    if (secPerTick <= 7200 || range <= oneDay) {
+      return 'HH:mm';
+    }
+    if (secPerTick <= 80000) {
+      return 'MM/DD HH:mm';
+    }
+    if (secPerTick <= 2419200 || range <= oneYear) {
+      return 'MM/DD';
+    }
+    return 'YYYY-MM';
+  }
+
+  return 'HH:mm';
+}
 
 type Point = {
   x: number;
