@@ -68,6 +68,7 @@ interface Props {
   colors?: Array<{ text: string; color: string }>;
 
   showYAxis: boolean;
+  minBarWidth?: number;
 
   experiments: any;
 }
@@ -89,6 +90,7 @@ export const GanttChart = ({
   sortOrder,
   colors,
   showYAxis,
+  minBarWidth = 1,
 }: Props) => {
   const [group, setGroup] = useState<string>();
 
@@ -334,7 +336,7 @@ export const GanttChart = ({
             const pixelStartX = startTimeValue ? Math.max(scaleX(startTime.toDate()), 0) : 0;
             const pixelEndX = endTimeValue ? Math.min(scaleX(endTime.toDate()), chartWidth) : chartWidth;
 
-            const taskBarWidth = Math.max(pixelEndX - pixelStartX - 2, 1);
+            const taskBarWidth = Math.max(pixelEndX - pixelStartX - 2, minBarWidth || 1);
 
             const taskBarPos = {
               x: pixelStartX + padding.left,

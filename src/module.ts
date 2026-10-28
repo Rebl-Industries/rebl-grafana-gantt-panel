@@ -108,6 +108,14 @@ export const plugin = getPanelPluginOrFallback(
         name: 'Show Y-axis',
         defaultValue: true,
       })
+      .addNumberInput({
+        path: 'minBarWidth',
+        name: 'Min bar width (px)',
+        description:
+          'Minimum width of a task bar in pixels, so very short tasks stay visible and easy to hover. Only affects drawing; start, end and duration in the tooltip stay exact.',
+        defaultValue: 1,
+        settings: { min: 1, max: 50, integer: true },
+      })
       .addSelect({
         path: 'sortBy',
         name: 'Sort by',

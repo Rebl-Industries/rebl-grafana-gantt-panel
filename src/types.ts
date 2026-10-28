@@ -11,6 +11,7 @@ export interface GanttOptions {
   sortBy: SortBy;
   sortOrder: SortOrder;
   showYAxis: boolean;
+  minBarWidth?: number;
 
   colors?: Array<{ text: string; color: string }>;
 

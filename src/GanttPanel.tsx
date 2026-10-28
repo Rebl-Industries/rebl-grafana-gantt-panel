@@ -108,6 +108,7 @@ export const GanttPanel: React.FC<Props> = ({
       sortOrder={options.sortOrder}
       colors={colors}
       showYAxis={options.showYAxis}
+      minBarWidth={options.minBarWidth}
     />
   );
 };
